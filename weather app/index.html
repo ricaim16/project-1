@@ -12,9 +12,9 @@
   <div class="main">
 
     <div class="search">
-      <input type="text" placeholder="Enter city name" spellcheck="false">
+      <input type="text" id="city" placeholder="Enter city name" spellcheck="false">
 
-      <button>
+      <button id="btn">
         <img src="images/search.png">
       </button>
     </div>
@@ -22,12 +22,26 @@
 
     <div class="weather">
       <img src="images/rain.png" class="weather-icon">
-      <h1 class="temp">10°C</h1>
-      <h2 class="city">Jijiga</h2>
+      <h1 id="temp_res" class="temp">10°C</h1>
+      <h2 id="city_res" class="city">Jijiga</h2>
     </div>
 
 
   </div>
+  <script>
+    const btn = document.getElementById('btn')
+    const city = document.getElementById('city')
+    const city_res = document.getElementById('city_res')
+    const temp_res = document.getElementById('temp_res')
+    btn.addEventListener('click',()=>{
+      fetch(`http://api.weatherapi.com/v1/current.json?key=7529ea56e46b482793081834231006&q=${city.value}`)
+        .then(response => response.json())
+        .then(data => {
+          city_res.innerText = data.location['name'];
+          temp_res.innerText = data.current['temp_c']
+        })
+    })
+  </script>
 </body>
 
 </html>
