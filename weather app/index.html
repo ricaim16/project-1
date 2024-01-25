@@ -21,27 +21,92 @@
 
 
     <div class="weather">
-      <img src="images/rain.png" class="weather-icon">
+      <img src="images/rain.png" id="weatheric" class="weather-icon">
       <h1 id="temp_res" class="temp">10°C</h1>
-      <h2 id="city_res" class="city">Jijiga</h2>
+      <h2 id="city_res" class="city">Addis Ababa</h2>
+
+      <br><br><br>
+
+      <div class="details">
+
+        <div class="hot">
+          <img src="images/humidity.png">
+          <div>
+            <p id="humidity_res"="humidity">50%</p>
+            <p>humidity</p>
+          </div>
+        </div>
+
+
+
+        <div class="hot">
+          <img src="images/wind.png">
+          <div>
+            <p id="wind_res" class="wind">15 km/hr</p>
+            <p>wind speed </p>
+          </div>
+        </div>
+
+
+      </div>
+
+
     </div>
 
-
   </div>
+  <br><br><br>
+
   <script>
     const btn = document.getElementById('btn')
     const city = document.getElementById('city')
     const city_res = document.getElementById('city_res')
     const temp_res = document.getElementById('temp_res')
-    btn.addEventListener('click',()=>{
-      fetch(`http://api.weatherapi.com/v1/current.json?key=7529ea56e46b482793081834231006&q=${city.value}`)
+    const weatheric = document.getElementById('weatheric')
+    const main = document.querySelector('.main');
+
+    btn.addEventListener('click', () => {
+      fetch(`https://api.weatherapi.com/v1/current.json?key=7529ea56e46b482793081834231006&q=${city.value}`)
         .then(response => response.json())
         .then(data => {
-          city_res.innerText = data.location['name'];
-          temp_res.innerText = data.current['temp_c']
+
+          if (data.error) {
+            alert("Invalid city entered. Please try again.");
+          } else {
+
+
+            city_res.innerText = data.location.name;
+            temp_res.innerText = Math.round(data.current.temp_c) + "°C";
+            document.getElementById("humidity_res").innerHTML = data.current.humidity + "%";
+            document.getElementById("wind_res").innerHTML = data.current.wind_kph + " km/h";
+
+            const weatherMain = data.current.condition.text.toLowerCase();
+
+            if (weatherMain === "cloudy") {
+              weatheric.src = "images/clouds.png";
+              main.style.backgroundColor = "#84B8EC";
+            } else if (weatherMain === "clear") {
+              weatheric.src = "images/clear.png";
+              main.style.backgroundColor = "#A29A65";
+            } else if (weatherMain === "rain") {
+              weatheric.src = "images/rain.png";
+              main.style.backgroundColor = "#7373F5";
+            } else if (weatherMain === "mist") {
+              weatheric.src = "images/mist.png";
+              main.style.backgroundColor = "#4DABA8";
+            } else if (weatherMain === "snow") {
+              weatheric.src = "images/snow.png";
+              main.style.backgroundColor = "#BEEDEB";
+            } else {
+              weatheric.src = "images/drizzle.png";
+              main.style.backgroundColor = "#6596B8";
+            }
+
+            document.querySelector(".weather").style.display = "block";
+          }
         })
     })
   </script>
+
 </body>
 
 </html>
