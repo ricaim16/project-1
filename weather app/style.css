@@ -16,12 +16,14 @@ body{
   background-color: rgb(97, 97, 229);
   color: #fff;
   margin: 100px auto 0; //center
-border-radius: 20px;
+border-radius: 10px;
 padding: 40px 35px ;
 text-align:center;
 
 }
-
+.main{
+  border-radius:20px ;
+}
 
 .search{
   width: 100%;
@@ -50,4 +52,36 @@ text-align:center;
 
 .search button img{
 width: 20px;
+}
+
+.weather-icon{
+  width: 170px;
+  margin-top: 30px;
+  
+}
+
+.weather h1{
+  font-size: 60px;
+  font-weight: 500px;
+}
+
+.weather h2{
+  font-size: 30px;
+    font-weight: 200px;
+    margin-top: -10px;
+}
+
+.details{
+  display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.hot img{
+width: 70px;
+
+}
+.weather{
+  display: none;
+
 }
