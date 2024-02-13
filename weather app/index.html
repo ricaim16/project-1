@@ -81,25 +81,25 @@
 
             const weatherMain = data.current.condition.text.toLowerCase();
 
-            if (weatherMain === "cloudy") {
-              weatheric.src = "images/clouds.png";
-              main.style.backgroundColor = "#84B8EC";
-            } else if (weatherMain === "clear") {
+            const temperature = data.current.temp_c;
+
+            if (temperature >= 20) {
               weatheric.src = "images/clear.png";
-              main.style.backgroundColor = "#A29A65";
-            } else if (weatherMain === "rain") {
-              weatheric.src = "images/rain.png";
-              main.style.backgroundColor = "#7373F5";
-            } else if (weatherMain === "mist") {
+              main.style.backgroundColor = "#FF6347";
+            } else if (temperature < 20 && temperature >= 10) {
               weatheric.src = "images/mist.png";
-              main.style.backgroundColor = "#4DABA8";
-            } else if (weatherMain === "snow") {
+              main.style.backgroundColor = "#FFA500";
+            } else if (temperature < 10 && temperature >= 1) {
+              weatheric.src = "images/clouds.png";
+              main.style.backgroundColor = "#00BFFF";
+            } else if (temperature < 1 && temperature >= -10) {
               weatheric.src = "images/snow.png";
-              main.style.backgroundColor = "#BEEDEB";
+              main.style.backgroundColor = "#00BFFF";
             } else {
               weatheric.src = "images/drizzle.png";
-              main.style.backgroundColor = "#6596B8";
+              main.style.backgroundColor = "#87CEFA";
             }
+
 
             document.querySelector(".weather").style.display = "block";
           }
